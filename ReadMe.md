@@ -1,0 +1,31 @@
+- src
+  - config
+    - database.ts
+    - jwt.ts
+  - controllers
+    - userController.ts
+  - middleware
+    - authMiddleware.ts
+  - models
+    - userModel.ts
+  - routes
+    - userRoutes.ts
+  - services
+    - userService.ts
+  - app.ts
+- test
+  - userController.test.ts
+  - userService.test.ts
+
+
+  - src
+  - modules
+    - user
+      - controller.ts
+      - service.ts
+      - middleware.ts
+      - routes.ts
+  - app.ts
+- test
+  - userController.test.ts
+  - userService.test.ts
