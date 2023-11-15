@@ -234,7 +234,7 @@ export const removeProfile = async (req: JwtPayload, res: Response) => {
   } catch (error: any) {
     return res.status(500).json({
       Error: error.message,
-      route: "/my-profile",
+      route: "/remove",
     });
   }
 };

@@ -1,31 +1,39 @@
-- src
-  - config
-    - database.ts
-    - jwt.ts
-  - controllers
-    - userController.ts
-  - middleware
-    - authMiddleware.ts
-  - models
-    - userModel.ts
-  - routes
-    - userRoutes.ts
-  - services
-    - userService.ts
-  - app.ts
-- test
-  - userController.test.ts
-  - userService.test.ts
+### INSTALL PACKAGES
+npm install
 
+### ADD ENVIRONMENT VARIABLES
+PORT= port number
+DB_USER = database username
+DB_PASSWORD = database password
+DB_NAME = database name
+DB_NAME1 = database name1
+Expiry= jwt expiration
+App_secret = application secret
 
-  - src
-  - modules
-    - user
-      - controller.ts
-      - service.ts
-      - middleware.ts
-      - routes.ts
-  - app.ts
-- test
-  - userController.test.ts
-  - userService.test.ts
+### TO START THE APP
+npm start
+
+### TO RUN THE TEST
+
+npm run test
+
+### REGISTERATION
+/signup
+
+### LOGIN
+/login
+
+### GET ALL USERS
+get-all-users
+
+### UPDATE A PROFILE
+/update
+NOTE: add token
+
+### GET A USER PROFILE
+/my-profile
+NOTE: add token
+
+### REMOVE AN ACCOUNT
+/remove
+NOTE: add token

@@ -2,22 +2,14 @@ import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
 
-// export const db = new Sequelize('nerdbug', 'root', 'password', {
-//   host: 'localhost',
-//   dialect: 'mysql',
-// });
+export const db = new Sequelize(process.env.DB_NAME!, process.env.DB_USER!, process.env.DB_PASSWORD!, {
+  host: "localhost",
+  dialect: "mysql",
+  port: 3306,
+  logging: false,
+});
 
-// export const db = new Sequelize(process.env.CONNECTION_STRING!, {
-//   logging: false,
-//   dialectOptions: {
-//     ssl: {
-//       require: false,
-//       // rejectUnauthorized: false,
-//     },
-//   },
-// });
-
-export const db = new Sequelize("nerdbug", "root", "password", {
+export const db1 = new Sequelize(process.env.DB_NAME1!, process.env.DB_USER!, process.env.DB_PASSWORD!, {
   host: "localhost",
   dialect: "mysql",
   port: 3306,
