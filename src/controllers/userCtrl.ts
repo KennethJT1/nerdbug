@@ -139,6 +139,36 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const UpdateUserProfile = async (req: JwtPayload, res: Response) => {
   try {
     const { id } = req.user;
+
+    // Find the user before the update
+    const userBeforeUpdate = (await UserInstance.findOne({
+      where: { id },
+    })) as unknown as UserAttributes;
+
+    if (!userBeforeUpdate) {
+      return res.status(404).json({
+        error: "User not found",
+      });
+    }
+
+    // Update the user
+    (await UserInstance.update(req.body, {
+      where: { id },
+      returning: true,
+    })) as unknown as UserAttributes;
+
+    // Find the updated user after the update, excluding the password
+    const updatedUser = (await UserInstance.findOne({
+      where: { id },
+      attributes: {
+        exclude: ["password"],
+      },
+    })) as unknown as UserAttributes;
+
+    return res.status(201).json({
+      msg: "Profile updated",
+      User: updatedUser,
+    });
   } catch (error: any) {
     return res.status(500).json({
       Error: error.message,
@@ -153,9 +183,12 @@ export const userProfile = async (req: JwtPayload, res: Response) => {
   try {
     const { id } = req.user;
 
-    const user = await UserInstance.findOne({ where: { id },  attributes: {
-      exclude: ['password'],
-    }, }) as unknown as UserAttributes;
+    const user = (await UserInstance.findOne({
+      where: { id },
+      attributes: {
+        exclude: ["password"],
+      },
+    })) as unknown as UserAttributes;
 
     if (!user) {
       return res.status(404).json({
@@ -180,9 +213,12 @@ export const removeProfile = async (req: JwtPayload, res: Response) => {
   try {
     const { id } = req.user;
 
-    const user = await UserInstance.findOne({ where: { id },  attributes: {
-      exclude: ['password'],
-    }, }) as unknown as UserAttributes;
+    const user = (await UserInstance.findOne({
+      where: { id },
+      attributes: {
+        exclude: ["password"],
+      },
+    })) as unknown as UserAttributes;
 
     if (!user) {
       return res.status(404).json({
@@ -190,7 +226,7 @@ export const removeProfile = async (req: JwtPayload, res: Response) => {
       });
     }
 
-    await UserInstance.destroy({where: {id}})
+    await UserInstance.destroy({ where: { id } });
 
     return res.status(200).json({
       msg: "Your profile as been removed from the database",
